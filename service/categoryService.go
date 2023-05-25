@@ -19,9 +19,9 @@ func SaveCategory(c echo.Context) error {
 	result := db.Create(&category)
 
 	if result.Error == nil {
-		return c.String(http.StatusOK, "Utworzono nowy produkt")
+		return c.String(http.StatusOK, "Utworzono nową kategorię")
 	} else {
-		return c.String(http.StatusInternalServerError, "Nie udało się utworzyć produktu")
+		return c.String(http.StatusInternalServerError, "Nie udało się utworzyć kategorii")
 	}
 
 }
@@ -40,7 +40,7 @@ func GetCategory(c echo.Context) error {
 	if result.Error == nil {
 		return c.JSON(http.StatusOK, category)
 	} else {
-		return c.String(http.StatusInternalServerError, "Nie udało się znaleźć produktu")
+		return c.String(http.StatusInternalServerError, "Nie udało się znaleźć kategorii")
 	}
 }
 
@@ -91,6 +91,6 @@ func DeleteCategory(c echo.Context) error {
 	if result.Error == nil {
 		return c.JSON(http.StatusOK, category)
 	} else {
-		return c.String(http.StatusInternalServerError, "Nie udało się usunąć produktu")
+		return c.String(http.StatusInternalServerError, "Nie udało się usunąć kategorii")
 	}
 }

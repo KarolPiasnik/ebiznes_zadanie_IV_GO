@@ -6,6 +6,7 @@ import (
 
 type Category struct {
 	gorm.Model
-	Id   uint64 `json:"id" sql:"AUTO_INCREMENT" gorm:"primary_key"`
-	Name uint   `json:"name"`
+	ID       uint64 `json:"ID" sql:"AUTO_INCREMENT" gorm:"primary_key"`
+	Name     string `json:"name"`
+	Products []Product
 }

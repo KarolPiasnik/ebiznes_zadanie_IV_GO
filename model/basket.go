@@ -6,5 +6,5 @@ import (
 
 type Basket struct {
 	gorm.Model
-	Id uint64 `json:"id" sql:"AUTO_INCREMENT" gorm:"primary_key"`
+	ID uint64 `json:"ID" sql:"AUTO_INCREMENT" gorm:"primary_key"`
 }
