@@ -29,14 +29,14 @@ func SaveCategory(c echo.Context) error {
 func GetAllCategories(c echo.Context) error {
 	db := database.DbManager()
 	categories := []model.Category{}
-	db.Find(&categories)
+	db.Preload("Products").Find(&categories)
 	return c.JSON(http.StatusOK, categories)
 }
 
 func GetCategory(c echo.Context) error {
 	db := database.DbManager()
 	category := model.Category{}
-	result := db.First(&category, c.Param("id"))
+	result := db.Preload("products").First(&category, c.Param("id"))
 	if result.Error == nil {
 		return c.JSON(http.StatusOK, category)
 	} else {

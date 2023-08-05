@@ -21,6 +21,7 @@ func Init() {
 	db.AutoMigrate(&model.Product{})
 	db.AutoMigrate(&model.Basket{})
 	db.AutoMigrate(&model.Category{})
+	db.AutoMigrate(&model.Payment{})
 }
 
 func DbManager() *gorm.DB {

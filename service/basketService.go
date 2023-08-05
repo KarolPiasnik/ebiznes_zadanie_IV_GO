@@ -25,14 +25,14 @@ func SaveBasket(c echo.Context) error {
 func GetAllBaskets(c echo.Context) error {
 	db := database.DbManager()
 	baskets := []model.Basket{}
-	db.Find(&baskets)
+	db.Preload("Products").Find(&baskets)
 	return c.JSON(http.StatusOK, baskets)
 }
 
 func GetBasket(c echo.Context) error {
 	db := database.DbManager()
 	basket := model.Basket{}
-	result := db.First(&basket, c.Param("id"))
+	result := db.Preload("Products").First(&basket, c.Param("id"))
 	if result.Error == nil {
 		return c.JSON(http.StatusOK, basket)
 	} else {

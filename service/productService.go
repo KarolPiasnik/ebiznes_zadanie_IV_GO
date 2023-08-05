@@ -29,14 +29,14 @@ func SaveProduct(c echo.Context) error {
 func GetAllProducts(c echo.Context) error {
 	db := database.DbManager()
 	products := []model.Product{}
-	db.Find(&products)
+	db.Preload("Category").Find(&products)
 	return c.JSON(http.StatusOK, products)
 }
 
 func GetProduct(c echo.Context) error {
 	db := database.DbManager()
 	product := model.Product{}
-	result := db.First(&product, c.Param("id"))
+	result := db.Preload("Category").First(&product, c.Param("id"))
 	if result.Error == nil {
 		return c.JSON(http.StatusOK, product)
 	} else {

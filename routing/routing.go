@@ -5,10 +5,15 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func Init() *echo.Echo {
 	e := echo.New()
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"http://localhost:3000"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
@@ -30,5 +35,11 @@ func Init() *echo.Echo {
 	e.GET("/baskets/:id", service.GetBasket)
 	e.PUT("/baskets/:id", service.UpdateBasket)
 	e.DELETE("/baskets/:id", service.DeleteBasket)
+
+	e.POST("/payments", service.SavePayment)
+	e.GET("/payments", service.GetAllPayments)
+	e.GET("/payments/:id", service.GetPayment)
+	e.PUT("/payments/:id", service.UpdatePayment)
+	e.DELETE("/payments/:id", service.DeletePayment)
 	return e
 }
