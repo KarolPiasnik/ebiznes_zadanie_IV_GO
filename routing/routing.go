@@ -18,28 +18,40 @@ func Init() *echo.Echo {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 
-	e.POST("/categories", service.SaveCategory)
-	e.GET("/categories", service.GetAllCategories)
-	e.GET("/categories/:id", service.GetCategory)
-	e.PUT("/categories/:id", service.UpdateCategory)
-	e.DELETE("/categories/:id", service.DeleteCategory)
+	categoryBasePath := "/categories"
+	categoryIdParametrizedPath := categoryBasePath + "/:id"
 
-	e.POST("/products", service.SaveProduct)
-	e.GET("/products", service.GetAllProducts)
-	e.GET("/products/:id", service.GetProduct)
-	e.PUT("/products/:id", service.UpdateProduct)
-	e.DELETE("/products/:id", service.DeleteProduct)
+	e.POST(categoryBasePath, service.SaveCategory)
+	e.GET(categoryBasePath, service.GetAllCategories)
+	e.GET(categoryIdParametrizedPath, service.GetCategory)
+	e.PUT(categoryIdParametrizedPath, service.UpdateCategory)
+	e.DELETE(categoryIdParametrizedPath, service.DeleteCategory)
 
-	e.POST("/baskets", service.SaveBasket)
-	e.GET("/baskets", service.GetAllBaskets)
-	e.GET("/baskets/:id", service.GetBasket)
-	e.PUT("/baskets/:id", service.UpdateBasket)
-	e.DELETE("/baskets/:id", service.DeleteBasket)
+	productBasePath := "/products"
+	productIdParametrizedPath := categoryBasePath + "/:id"
 
-	e.POST("/payments", service.SavePayment)
-	e.GET("/payments", service.GetAllPayments)
-	e.GET("/payments/:id", service.GetPayment)
-	e.PUT("/payments/:id", service.UpdatePayment)
-	e.DELETE("/payments/:id", service.DeletePayment)
+	e.POST(productBasePath, service.SaveProduct)
+	e.GET(productBasePath, service.GetAllProducts)
+	e.GET(productIdParametrizedPath, service.GetProduct)
+	e.PUT(productIdParametrizedPath, service.UpdateProduct)
+	e.DELETE(productIdParametrizedPath, service.DeleteProduct)
+
+	basketBasePath := "/baskets"
+	basketIdParametrizedPath := categoryBasePath + "/:id"
+
+	e.POST(basketBasePath, service.SaveBasket)
+	e.GET(basketBasePath, service.GetAllBaskets)
+	e.GET(basketIdParametrizedPath, service.GetBasket)
+	e.PUT(basketIdParametrizedPath, service.UpdateBasket)
+	e.DELETE(basketIdParametrizedPath, service.DeleteBasket)
+
+	paymentBasePath := "/payments"
+	paymentIdParametrizedPath := categoryBasePath + "/:id"
+
+	e.POST(paymentBasePath, service.SavePayment)
+	e.GET(paymentBasePath, service.GetAllPayments)
+	e.GET(paymentIdParametrizedPath, service.GetPayment)
+	e.PUT(paymentIdParametrizedPath, service.UpdatePayment)
+	e.DELETE(paymentIdParametrizedPath, service.DeletePayment)
 	return e
 }
