@@ -28,11 +28,11 @@ func Init() {
 	}
 
 	if errBasket != nil {
-		panic("failed to migrate category table")
+		panic("failed to migrate basket table")
 	}
 
 	if errCategory != nil {
-		panic("failed to migrate basket table")
+		panic("failed to migrate category table")
 	}
 
 	if errPayment != nil {
