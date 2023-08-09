@@ -18,10 +18,26 @@ func Init() {
 	}
 
 	// Migrate the schema
-	db.AutoMigrate(&model.Product{})
-	db.AutoMigrate(&model.Basket{})
-	db.AutoMigrate(&model.Category{})
-	db.AutoMigrate(&model.Payment{})
+	errProduct := db.AutoMigrate(&model.Product{})
+	errBasket := db.AutoMigrate(&model.Basket{})
+	errCategory := db.AutoMigrate(&model.Category{})
+	errPayment := db.AutoMigrate(&model.Payment{})
+
+	if errProduct != nil {
+		panic("failed to migrate product table")
+	}
+
+	if errBasket != nil {
+		panic("failed to migrate category table")
+	}
+
+	if errCategory != nil {
+		panic("failed to migrate basket table")
+	}
+
+	if errPayment != nil {
+		panic("failed to migrate payment table")
+	}
 }
 
 func DbManager() *gorm.DB {
