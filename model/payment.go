@@ -6,6 +6,7 @@ import (
 
 type Payment struct {
 	gorm.Model
-	ID     uint64 `json:"ID" sql:"AUTO_INCREMENT" gorm:"primary_key"`
-	Amount uint64 `json:"amount"`
+	ID               uint64 `json:"ID" sql:"AUTO_INCREMENT" gorm:"primary_key"`
+	Amount           uint64 `json:"amount"`
+	NumberOfProducts uint64 `json:"numberOfProducts"`
 }
