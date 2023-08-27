@@ -22,6 +22,7 @@ func Init() {
 	errBasket := db.AutoMigrate(&model.Basket{})
 	errCategory := db.AutoMigrate(&model.Category{})
 	errPayment := db.AutoMigrate(&model.Payment{})
+	errUser := db.AutoMigrate(&model.User{})
 
 	if errProduct != nil {
 		panic("failed to migrate product table")
@@ -37,6 +38,10 @@ func Init() {
 
 	if errPayment != nil {
 		panic("failed to migrate payment table")
+	}
+
+	if errUser != nil {
+		panic("failed to migrate user table")
 	}
 }
 

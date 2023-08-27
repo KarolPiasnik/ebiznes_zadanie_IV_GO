@@ -1,6 +1,7 @@
 package routing
 
 import (
+	"myapp/auth"
 	"myapp/service"
 	"net/http"
 
@@ -11,9 +12,11 @@ import (
 func Init() *echo.Echo {
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"http://localhost:3000"},
-		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+		AllowOrigins:     []string{"http://localhost:3000", "https://accounts.google.com/o/oauth2"},
+		AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+		AllowCredentials: true,
 	}))
+	e.Use(auth.AuthHandler)
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
@@ -53,5 +56,10 @@ func Init() *echo.Echo {
 	e.GET(paymentIdParametrizedPath, service.GetPayment)
 	e.PUT(paymentIdParametrizedPath, service.UpdatePayment)
 	e.DELETE(paymentIdParametrizedPath, service.DeletePayment)
+
+	e.GET("/auth/google/callback", auth.HandleAuthCallback)
+	e.GET("/auth", auth.HandleAuth)
+	e.GET("/auth/logout", auth.Logout)
+
 	return e
 }
