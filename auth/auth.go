@@ -1,8 +1,8 @@
 package auth
 
 import (
+	"crypto/rand"
 	"encoding/hex"
-	"math/rand"
 	"myapp/service"
 	"net/http"
 	"strconv"
