@@ -59,7 +59,7 @@ func Init() *echo.Echo {
 
 	e.GET("/auth/google/callback", auth.HandleAuthCallback)
 	e.GET("/auth", auth.HandleAuth)
-	e.GET("/auth/logout", auth.Logout)
+	e.GET("/logout/auth", auth.Logout)
 
 	return e
 }
