@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"myapp/service"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -14,7 +15,7 @@ import (
 )
 
 // set to true for dev mode(api allowing all calls)
-var devMode = false
+var devMode = os.Getenv("DEV_MODE")
 
 func HandleAuthCallback(c echo.Context) error {
 	user, err := gothic.CompleteUserAuth(c.Response(), c.Request())
@@ -96,7 +97,7 @@ func GenerateSecureToken(length int) string {
 
 func AuthHandler(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		if devMode {
+		if devMode == "true" {
 			return next(c)
 		}
 		if strings.Contains(c.Request().RequestURI, "auth") {
