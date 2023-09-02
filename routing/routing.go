@@ -12,9 +12,9 @@ import (
 func Init() *echo.Echo {
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins:     []string{"http://localhost:3000", "https://accounts.google.com/o/oauth2"},
+		AllowOrigins:     []string{"*"},
 		AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
-		AllowCredentials: true,
+		AllowCredentials: false,
 	}))
 	e.Use(auth.AuthHandler)
 	e.GET("/", func(c echo.Context) error {
